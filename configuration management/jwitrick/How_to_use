@@ -1,0 +1,32 @@
+
+
+For this challenge I have choose to solve it using Ansible.
+
+Assumptions:
+ - The package facter is already installed on the client machine(s).
+ - The puppet facts 'widget' is installed and accessible on the machine.
+
+
+Setup:
+ - Control machine (local)
+   * Install Ansible (http://docs.ansible.com/intro_installation.html)
+   * Using ssh keys, ensure the ansible machine can connect to the client
+     machine as root with out a password prompt.
+ - Client machine(s) (remote)
+   * Ensure control machine can connect without password prompt.
+   * Ensure facter is installed, and configured to allow the command
+     'facter -p widget' to run.
+
+How to execute (from the control machine):
+1) Checkout the code from the PR
+2) Change into the directory
+   (automation-challenges/configuration\ management/jwitrick)
+3) Modify the file 'ansible_hosts' for each server you want to control
+   (one host per line). Note: If DNS is not setup just use the IP address of
+   the machine(s).
+4) On the control machine run:
+   `ansible-playbook -i ansible_hosts main.yml`
+
+
+Once Ansible finishes running it will show which servers were successfull, and
+which ones failed.

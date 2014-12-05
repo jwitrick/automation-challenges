@@ -1,0 +1,15 @@
+---
+- hosts: all
+  gather_facts: false
+  remote_user: root
+
+  tasks:
+  - name: Get Facter output
+    command: facter -p widget
+    register: facter_output
+
+  - name: Put template on disk
+    template: src=template.file
+              dest=/etc/widgetfile
+              mode=755
+    with_items: facter_output.stdout_lines
