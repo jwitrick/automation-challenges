@@ -90,9 +90,9 @@ def find_word(key):
 @app.route("/word/<key>", methods=["PUT", "POST"])
 def create_word(key):
     if ' ' in request.data['word']:
-        return {"ERROR": "Failed it must be one word"}
+        return {"ERROR": "Failed it must be one word"}, status.HTTP_400_BAD_REQUEST
     if request.data['word'] != key:
-        return {"ERROR": "Word and data mismatch"}
+        return {"ERROR": "Word and data mismatch"}, status.HTTP_400_BAD_REQUEST
     _add_word(key)
     return '', status.HTTP_204_NO_CONTENT
 
